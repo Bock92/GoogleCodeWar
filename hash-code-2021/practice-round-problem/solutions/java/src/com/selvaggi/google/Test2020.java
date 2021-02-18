@@ -2,6 +2,8 @@ package com.selvaggi.google;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,9 +14,8 @@ public class Test2020 {
 	public static void main(String[] args) {
 		
 		String filePath = "..\\..\\input_files\\";
+		String outPath = "..\\..\\output\\";
 	    String fileName = "a_example";
-
-		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	    
 	    int pizzaNumber =0;
 	    int twoMemberTeam = 0;
@@ -179,9 +180,26 @@ public class Test2020 {
 	      System.out.println(finalDeliveries.size());
 	      for(int i = 0; i < finalDeliveries.size(); i++)
 		        System.out.println(finalDeliveries.get(i).getPizzas() + " " +  finalDeliveries.get(i).toStringIndex());
-	    
-	      
+
+			// Write the file
+		FileWriter myWriter = null;
+			try {
+				myWriter = new FileWriter(outPath + "output.txt");
+
+				// Number of teams
+				myWriter.write(finalDeliveries.size() + "");
+				for(int i = 0; i < finalDeliveries.size(); i++)
+					myWriter.write("\n" + finalDeliveries.get(i).getPizzas() + " " +  finalDeliveries.get(i).toStringIndex());
+
+				myWriter.close();
+				System.out.println("Successfully wrote to the file.");
+			}
+			catch (IOException e) {
+				System.out.println("An error occurred.");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 
-}
+
