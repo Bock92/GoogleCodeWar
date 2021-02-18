@@ -11,13 +11,14 @@ import java.util.Scanner;
 
 public class Test2020 {
 
-	public static final int FLEXIBLE_NUMBER = 20000;
+	public static final int FLEXIBLE_NUMBER = 0;
+	public static final int MIN_CUT = 1000;
 
 	public static void main(String[] args) {
 
 		String filePath = "..\\..\\input_files\\";
 		String outPath = "..\\..\\output\\";
-		String fileName = "b_little_bit_of_everything.in";
+		String fileName = "d_many_pizzas.in";
 
 
 
@@ -88,7 +89,8 @@ public class Test2020 {
 
 
 		// CUT ?????
-		int firstCut = twoMemberTeam * 2 + threeMemberTeam  * 3 + fourMemberTeam * 4 + FLEXIBLE_NUMBER; //504 539 585
+		int firstCut = Math.min(twoMemberTeam * 2 + threeMemberTeam  * 3 + fourMemberTeam * 4 + FLEXIBLE_NUMBER, MIN_CUT); //504 539 585
+
 		System.out.println("First cut " + firstCut);
 
 		for (int i = pizzas.size()-1; i >= firstCut; i--)
