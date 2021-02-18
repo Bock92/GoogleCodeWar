@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Pizza {
 	
-	int numberOfIngredients = 0;
+	public int numberOfIngredients = 0;
 	int index;
 	ArrayList<String> ingredients;
 	
