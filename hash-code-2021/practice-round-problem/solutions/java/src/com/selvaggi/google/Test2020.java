@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Test2020 {
 
 	public static final int FLEXIBLE_NUMBER = 0;
-	public static final int MIN_CUT = 1000;
+	public static final int MIN_CUT = 1100;
 
 	static int pizzaNumber =0;
 	static int twoMemberTeam = 0;
@@ -112,7 +112,7 @@ public class Test2020 {
 
 		// Print file statistics
 		System.out.println("Team 2: " + twoMemberTeam + " Team 3: "+ threeMemberTeam + " Team 4: " + fourMemberTeam);
-
+		System.out.println("Number of pizzas: " + pizzas.size() + " Max Ingredients: " + maxNumOfIngredient);
 
 		//////////////////////////////////////////////////////////
 		/******************* END READ FILE *********************/
@@ -129,19 +129,14 @@ public class Test2020 {
 
 
 		// First Cut
-		int firstCut = Math.min(twoMemberTeam * 2 + threeMemberTeam  * 3 + fourMemberTeam * 4 + FLEXIBLE_NUMBER, MIN_CUT); //504 539 585
-
-		System.out.println("First cut " + firstCut);
+		int firstCut = Math.min(twoMemberTeam * 2 + threeMemberTeam  * 3 + fourMemberTeam * 4 + FLEXIBLE_NUMBER, MIN_CUT);
 
 		for (int i = pizzas.size()-1; i >= firstCut; i--)
 			pizzas.remove(i);
 
 		pizzaNumber = pizzas.size();
 
-		System.out.println("Number of pizzas: " + pizzas.size() + " Max Ingredients: " + maxNumOfIngredient);
-
-		System.out.println("Working on 2 combinations");
-
+		System.out.println("Working on 2 combinations - First cut " + firstCut);
 		// ALL 2 COMBINATION
 		ArrayList<Delivery> twoDeliveries = new ArrayList<>();
 
@@ -166,9 +161,10 @@ public class Test2020 {
 
 
 
-		System.out.println("Working on 3 combinations");
+
 		// SECOND CUT
 		int secondCut = Math.min(Math.max(threeMemberTeam, fourMemberTeam) + FLEXIBLE_NUMBER, twoDeliveries.size());
+		System.out.println("Working on 3 combinations - Second Cut: " + secondCut);
 		ArrayList<Delivery> threeDeliveries = new ArrayList<>();
 
 		if(threeMemberTeam != 0) {
@@ -198,9 +194,10 @@ public class Test2020 {
 
 
 		// ALL 3 COMBINATION
-		System.out.println("Working on 4 combinations");
+
 		// THIRD CUT
 		int thirdCut = Math.min(fourMemberTeam + FLEXIBLE_NUMBER, threeDeliveries.size());
+		System.out.println("Working on 4 combinations - Third Cut: " + thirdCut);
 		ArrayList<Delivery> fourDeliveries = new ArrayList<>();
 
 		if(fourMemberTeam != 0) {
