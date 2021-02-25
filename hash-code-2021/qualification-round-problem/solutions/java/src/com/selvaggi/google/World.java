@@ -33,7 +33,6 @@ public class World {
 
                 if(c.streets.get(c.currentStreet).length == 1){
                     c.isArrived = true;
-
                 }
 
             }
@@ -42,8 +41,12 @@ public class World {
                 c.positionOnTheStreet++;
 
                 if(c.positionOnTheStreet == currentStreet.length - 1) {
-                    c.isWaiting = true;
-                    currentStreet.queueLength++;
+                    if(c.currentStreet == c.streets.size() - 1) {
+                        c.isArrived = true;
+                    } else {
+                        c.isWaiting = true;
+                        currentStreet.queueLength++;
+                    }
                 }
             }
 
