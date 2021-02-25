@@ -85,10 +85,15 @@ public class Qualification2021 {
 				ArrayList<Street> path = new ArrayList<>();
 
 
-
+				boolean firstStreet = true;
 				while(myLine.hasNext()) {
 					String newStreet = myLine.next();
-					path.add(world.getStreetByName(newStreet));
+					Street street = world.getStreetByName(newStreet);
+					path.add(street);
+					if(firstStreet){
+						street.queueLength++;
+						firstStreet = false;
+					}
 				}
 
 				myCar.streets = path;
@@ -141,23 +146,32 @@ public class Qualification2021 {
 		readInputFile(filePath, fileName);
 
 		// Print input
-		System.out.println("simulationDuration " + simulationDuration+
-		" numberOfIntersection " + numberOfIntersection+
-		" numberOfStreets " +numberOfStreets+
-		" numberOfCars " +numberOfCars+
-		" bonusPoint " +bonusPoint );
+		debugPrintInput();
 
-		for (Street s: streets) {
-			System.out.println(s.toString());
-		}
-		for (Car c: cars) {
-			System.out.println(c.toString());
-		}
+
+
 
 
 		// Write the file
 		//writeOutputFile(outPath, finalDeliveries);
 
+	}
+
+
+	public static void debugPrintInput(){
+		System.out.println("simulationDuration " + simulationDuration+
+				" numberOfIntersection " + numberOfIntersection+
+				" numberOfStreets " +numberOfStreets+
+				" numberOfCars " +numberOfCars+
+				" bonusPoint " +bonusPoint );
+
+
+		for (Street s: streets) {
+			System.out.println(s.toString() + " CarsInQueue " + s.queueLength);
+		}
+		for (Car c: cars) {
+			System.out.println(c.toString());
+		}
 	}
 }
 	
