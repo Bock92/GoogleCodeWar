@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Test2020 {
+public class Qualification2021 {
 
 	public static final int FLEXIBLE_NUMBER = 0;
 	public static final int MIN_CUT = 1100;
