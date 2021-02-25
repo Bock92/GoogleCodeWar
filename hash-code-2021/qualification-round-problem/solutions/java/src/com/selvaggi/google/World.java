@@ -63,6 +63,8 @@ public class World {
             for(int index = 0; index < i.streets.size(); index++) {
                 if(!finish && i.streets.get(index).queueLength > 0) {
                     i.streets.get(index).isGreen = true;
+                    i.streets.get(index).greenSeconds++;
+                    i.isTouch = true;
                     finish = true;
                 } else {
                     i.streets.get(index).isGreen = false;
@@ -70,6 +72,29 @@ public class World {
             }
         }
     }
+
+    public int getNIntersection() {
+        int count = 0;
+        for(Intersection i: intersections) {
+            if(i.isTouch) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public int getNStreets(Intersection inter) {
+        int count = 0;
+        for(Street s: inter.streets) {
+            if(s.greenSeconds > 0) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
 
 
 }

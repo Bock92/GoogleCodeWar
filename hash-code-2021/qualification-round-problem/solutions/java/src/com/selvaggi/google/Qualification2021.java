@@ -119,20 +119,26 @@ public class Qualification2021 {
 		}
 	}
 
-	/**
-	 * Write Output File
-	 * @param outPath
-	 * @param finalDeliveries
-	 */
-	private static void writeOutputFile(String outPath, ArrayList<Delivery> finalDeliveries){
+	private static void writeOutputFile(String outPath, String fileName, World world){
 		FileWriter myWriter = null;
 		try {
-			myWriter = new FileWriter(outPath + "output.txt");
+			myWriter = new FileWriter(outPath + fileName + "_out.txt");
 
 			// Number of teams
-			myWriter.write(finalDeliveries.size() + "");
-			for(int i = 0; i < finalDeliveries.size(); i++)
-				myWriter.write("\n" + finalDeliveries.get(i).getPizzas() + " " +  finalDeliveries.get(i).toStringIndex());
+			myWriter.write(world.getNIntersection() + "\n");
+
+			for(Intersection intersect: world.intersections) {
+				myWriter.write(intersect.id + "\n");
+				myWriter.write(world.getNStreets(intersect) + "");
+				// id
+				// street => name secondi
+				for(Street street: intersect.streets) {
+					if(street.greenSeconds > 0) {
+						myWriter.write("\n" + street.name + " " + street.greenSeconds + "\n");
+					}
+				}
+
+			}
 
 			myWriter.close();
 			System.out.println("Successfully wrote to the file: " + outPath + "output.txt");
@@ -160,6 +166,8 @@ public class Qualification2021 {
 		debugPrintInput();
 		printIntersection();
 
+		world.cars = cars;
+
 		for(int i =0 ; i < simulationDuration; i++){
 			world.updateTrafficLight();
 			world.update();
@@ -167,7 +175,7 @@ public class Qualification2021 {
 
 
 		// Write the file
-		//writeOutputFile(outPath, finalDeliveries);
+		writeOutputFile(outPath, fileName, world);
 
 	}
 
