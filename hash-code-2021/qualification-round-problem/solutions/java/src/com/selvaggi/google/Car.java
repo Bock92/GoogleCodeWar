@@ -7,8 +7,9 @@ public class Car {
     public ArrayList<Street> streets;
     public int tripTime;
     public boolean isArrived;
+    public int streetsSize;
 
     public Car() {
-        
+
     }
 }
