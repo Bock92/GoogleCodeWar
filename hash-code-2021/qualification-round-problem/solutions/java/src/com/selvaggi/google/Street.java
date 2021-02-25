@@ -10,4 +10,12 @@ public class Street {
     public Street() {
 
     }
+
+    public java.lang.String toString() {
+        StringBuilder out = new StringBuilder();
+        return out.append(this.start_intersection + " ")
+                .append(this.end_intersection + " ")
+                .append(this.name + " ")
+                .append(this.length).toString();
+    }
 }

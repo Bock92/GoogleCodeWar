@@ -12,4 +12,14 @@ public class Car {
     public Car() {
 
     }
+
+    public String toString() {
+        StringBuilder out = new StringBuilder().append(streetsSize + " ");
+
+        for(int i = 0; i< this.streets.size(); i++) {
+            out.append(streets.get(i).name + " ");
+        }
+
+        return out.toString();
+    }
 }
