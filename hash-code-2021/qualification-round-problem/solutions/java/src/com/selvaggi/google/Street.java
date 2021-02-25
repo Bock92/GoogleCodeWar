@@ -6,6 +6,7 @@ public class Street {
     public int length;
     public int start_intersection;
     public int end_intersection;
+    public boolean isGreen;
 
     public Street() {
 

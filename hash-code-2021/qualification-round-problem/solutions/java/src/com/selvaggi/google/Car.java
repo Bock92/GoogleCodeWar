@@ -6,8 +6,11 @@ public class Car {
     public int id;
     public ArrayList<Street> streets;
     public int tripTime;
-    public boolean isArrived;
+    public boolean isArrived = false;
     public int streetsSize;
+    public int currentStreet;
+    public int positionOnTheStreet;
+    public boolean isWaiting = true;
 
     public Car() {
 
@@ -22,4 +25,5 @@ public class Car {
 
         return out.toString();
     }
+
 }
