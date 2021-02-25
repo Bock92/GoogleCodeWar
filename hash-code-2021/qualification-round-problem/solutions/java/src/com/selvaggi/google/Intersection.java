@@ -7,6 +7,6 @@ public class Intersection {
     public ArrayList<Street> streets;
 
     public Intersection() {
-
+        streets = new ArrayList<>();
     }
 }

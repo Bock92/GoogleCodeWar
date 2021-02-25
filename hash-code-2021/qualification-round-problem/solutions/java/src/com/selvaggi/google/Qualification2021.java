@@ -23,6 +23,7 @@ public class Qualification2021 {
 
 	static ArrayList<Street> streets;
 	static ArrayList<Car> cars;
+	static ArrayList<Intersection> intersections;
 	static World world;
 
 
@@ -38,6 +39,7 @@ public class Qualification2021 {
 
 		streets = new ArrayList<>();
 		cars = new ArrayList<>();
+		intersections = new ArrayList<>();
 
 		try {
 			File myObj = new File(filePath + fileName);
@@ -56,11 +58,19 @@ public class Qualification2021 {
 				myLine.close();
 			}
 
+		   // Generate Intersections
+			for(int i = 0; i < numberOfIntersection; i++){
+				Intersection myIntersection = new Intersection();
+				myIntersection.id = i;
+				intersections.add(myIntersection);
+			}
+			// Link the world to the local object
+			world.intersections = intersections;
+
 			// Read the streets
 			for(int i = 0; i < numberOfStreets; i++){
 				String data = myReader.nextLine();
 				Scanner myLine = new Scanner(data);
-
 				Street myStreet = new Street();
 
 				myStreet.start_intersection = myLine.nextInt();
@@ -69,8 +79,9 @@ public class Qualification2021 {
 				myStreet.length = myLine.nextInt();
 				myStreet.id = i;
 
-				streets.add(myStreet);
 				world.addStreet(myStreet);
+				streets.add(myStreet);
+				intersections.get(myStreet.end_intersection).streets.add(myStreet);
 			}
 
 			// Read the cars
@@ -147,14 +158,26 @@ public class Qualification2021 {
 
 		// Print input
 		debugPrintInput();
+		printIntersection();
 
-
-
+		for(int i =0 ; i < simulationDuration; i++){
+			world.updateTrafficLight();
+			world.update();
+		}
 
 
 		// Write the file
 		//writeOutputFile(outPath, finalDeliveries);
 
+	}
+
+	public static void printIntersection(){
+		for(Intersection i: world.intersections){
+			System.out.print("Intersection " + i.id);
+			for(Street s: i.streets)
+				System.out.print(" " + s.name);
+			System.out.println("");
+		}
 	}
 
 
