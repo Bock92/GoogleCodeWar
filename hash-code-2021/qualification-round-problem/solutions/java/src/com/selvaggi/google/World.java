@@ -1,8 +1,6 @@
 package com.selvaggi.google;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 
 public class World {
     public HashMap<String, Street> streets;
@@ -53,7 +51,25 @@ public class World {
     }
 
     public void updateTrafficLight() {
-        
-
+        for(Intersection i: intersections) {
+            Collections.sort(i.streets, new Comparator<Street>() {
+                @Override
+                public int compare(Street s1, Street s2)
+                {
+                    return  s1.queueLength - s2.queueLength;
+                }
+            });
+            boolean finish = false;
+            for(int index = 0; index < i.streets.size(); index++) {
+                if(!finish && i.streets.get(index).queueLength > 0) {
+                    i.streets.get(index).isGreen = true;
+                    finish = true;
+                } else {
+                    i.streets.get(index).isGreen = false;
+                }
+            }
+        }
     }
+
+
 }
