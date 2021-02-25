@@ -23,19 +23,34 @@ public class World {
     public void update() {
         t++;
         for(Car c: cars) {
-            if(c.isWaiting && c.streets.get(c.currentStreet).isGreen) {
+            Street currentStreet = c.streets.get(c.currentStreet);
+            if(c.isWaiting && currentStreet.isGreen) {
                 // attraverso l'incrocio
                 c.positionOnTheStreet = 0;
                 c.isWaiting = false;
+                currentStreet.queueLength--;
                 c.currentStreet++;
 
                 if(c.streets.get(c.currentStreet).length == 1){
                     c.isArrived = true;
+
                 }
 
+            }
+
+            if(!c.isWaiting && !c.isArrived) {
+                c.positionOnTheStreet++;
+
+                if(c.positionOnTheStreet == currentStreet.length - 1) {
+                    c.isWaiting = true;
+                    currentStreet.queueLength++;
+                }
             }
 
         }
     }
 
+    public void updateTrafficLight() {
+        
+    }
 }
