@@ -12,23 +12,22 @@ import java.util.Scanner;
 public class Test2020 {
 
 	public static final int FLEXIBLE_NUMBER = 0;
-	public static final int MIN_CUT = 1000;
+	public static final int MIN_CUT = 1100;
 
-	public static void main(String[] args) {
+	static int pizzaNumber =0;
+	static int twoMemberTeam = 0;
+	static int threeMemberTeam = 0;
+	static int fourMemberTeam = 0;
+	static int maxNumOfIngredient = 0;
 
-		String filePath = "..\\..\\input_files\\";
-		String outPath = "..\\..\\output\\";
-		String fileName = "d_many_pizzas.in";
-
-
-
-		int pizzaNumber =0;
-		int twoMemberTeam = 0;
-		int threeMemberTeam = 0;
-		int fourMemberTeam = 0;
-		int maxNumOfIngredient = 0;
-
-
+	/**
+	 * Read input file
+	 * @param filePath
+	 * @param fileName
+	 * @return ArrayList with the input structured
+	 */
+	private static ArrayList<Pizza> readInputFile(String filePath, String fileName){
+		System.out.println("Read file named " + fileName);
 		ArrayList<Pizza> pizzas = new ArrayList<>();
 
 		try {
@@ -72,8 +71,49 @@ public class Test2020 {
 		catch (FileNotFoundException e) {
 			System.out.println("File Not found! " + filePath + fileName);
 		}
+		return pizzas;
+	}
 
+	/**
+	 * Write Output File
+	 * @param outPath
+	 * @param finalDeliveries
+	 */
+	private static void writeOutputFile(String outPath, ArrayList<Delivery> finalDeliveries){
+		FileWriter myWriter = null;
+		try {
+			myWriter = new FileWriter(outPath + "output.txt");
+
+			// Number of teams
+			myWriter.write(finalDeliveries.size() + "");
+			for(int i = 0; i < finalDeliveries.size(); i++)
+				myWriter.write("\n" + finalDeliveries.get(i).getPizzas() + " " +  finalDeliveries.get(i).toStringIndex());
+
+			myWriter.close();
+			System.out.println("Successfully wrote to the file: " + outPath + "output.txt");
+		}
+		catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+
+		String filePath = "..\\..\\input_files\\";
+		String outPath = "..\\..\\output\\";
+		String fileName = "a_example";
+
+		if(args.length > 0)
+			fileName = args[0];
+
+		// Read the input file
+		ArrayList<Pizza> pizzas = readInputFile(filePath, fileName);
+
+		// Print file statistics
 		System.out.println("Team 2: " + twoMemberTeam + " Team 3: "+ threeMemberTeam + " Team 4: " + fourMemberTeam);
+		System.out.println("Number of pizzas: " + pizzas.size() + " Max Ingredients: " + maxNumOfIngredient);
+
 		//////////////////////////////////////////////////////////
 		/******************* END READ FILE *********************/
 		//////////////////////////////////////////////////////////
@@ -88,25 +128,15 @@ public class Test2020 {
 		});
 
 
-		// CUT ?????
-		int firstCut = Math.min(twoMemberTeam * 2 + threeMemberTeam  * 3 + fourMemberTeam * 4 + FLEXIBLE_NUMBER, MIN_CUT); //504 539 585
-
-		System.out.println("First cut " + firstCut);
+		// First Cut
+		int firstCut = Math.min(twoMemberTeam * 2 + threeMemberTeam  * 3 + fourMemberTeam * 4 + FLEXIBLE_NUMBER, MIN_CUT);
 
 		for (int i = pizzas.size()-1; i >= firstCut; i--)
 			pizzas.remove(i);
 
 		pizzaNumber = pizzas.size();
 
-		System.out.println("Number of pizzas: " + pizzas.size() + " Max Ingredients: " + maxNumOfIngredient);
-		//System.out.println(pizzas.get(0).numberOfIngredients + "");
-
-
-		//for(int i = 0; i < pizzas.size(); i++)
-		//  System.out.println(pizzas.get(i).toString());
-
-		System.out.println("Calcolo 2 combinazioni");
-
+		System.out.println("Working on 2 combinations - First cut " + firstCut);
 		// ALL 2 COMBINATION
 		ArrayList<Delivery> twoDeliveries = new ArrayList<>();
 
@@ -131,9 +161,10 @@ public class Test2020 {
 
 
 
-		System.out.println("Calcolo 3 combinazioni");
+
 		// SECOND CUT
 		int secondCut = Math.min(Math.max(threeMemberTeam, fourMemberTeam) + FLEXIBLE_NUMBER, twoDeliveries.size());
+		System.out.println("Working on 3 combinations - Second Cut: " + secondCut);
 		ArrayList<Delivery> threeDeliveries = new ArrayList<>();
 
 		if(threeMemberTeam != 0) {
@@ -163,28 +194,10 @@ public class Test2020 {
 
 
 		// ALL 3 COMBINATION
-		/*if(threeMemberTeam != 0){
-			for(int i = 0; i < pizzas.size(); i++){
-				for(int j = i + 1; j< pizzas.size(); j++){
-					for(int k = j + 1; k< pizzas.size(); k++){
-						Delivery myDelivery = new Delivery();
-						myDelivery.addPizza(pizzas.get(i));
-						myDelivery.addPizza(pizzas.get(j));
-						myDelivery.addPizza(pizzas.get(k));
-						deliveries.add(myDelivery);
-					}
-				}
-			}
-		}*/
-
-
-		System.out.println("Calcolo 4 combinazioni");
-
-
-
 
 		// THIRD CUT
 		int thirdCut = Math.min(fourMemberTeam + FLEXIBLE_NUMBER, threeDeliveries.size());
+		System.out.println("Working on 4 combinations - Third Cut: " + thirdCut);
 		ArrayList<Delivery> fourDeliveries = new ArrayList<>();
 
 		if(fourMemberTeam != 0) {
@@ -211,62 +224,8 @@ public class Test2020 {
 			}
 		});
 
-		//for(int i = 0; i < fourDeliveries.size(); i++)
-		//	System.out.println(fourDeliveries.get(i).getPizzas() + " " +  fourDeliveries.get(i).toStringIndex());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		// ALL 4 COMBINATION
-	/*	if(fourMemberTeam != 0){
-			for(int i = 0; i < pizzas.size(); i++){
-				for(int j = i + 1; j< pizzas.size(); j++){
-					for(int k = j + 1; k< pizzas.size(); k++){
-						for(int z = k + 1; z < pizzas.size(); z++){
-							Delivery myDelivery = new Delivery();
-							myDelivery.addPizza(pizzas.get(i));
-							myDelivery.addPizza(pizzas.get(j));
-							myDelivery.addPizza(pizzas.get(k));
-							myDelivery.addPizza(pizzas.get(z));
-							deliveries.add(myDelivery);
-						}
-					}
-				}
-			}
-		}*/
-
-
-
-
-
-/*
-		Collections.sort(deliveries, new Comparator<Delivery>() {
-			@Override
-			public int compare(Delivery d2, Delivery d1)
-			{
-				return  d1.getScore() - d2.getScore();
-			}
-		});*/
-
-
-
-
-		/// MIX 2+ 3 +4;
+		/// MIX 2 + 3 +4;
 		ArrayList<Delivery> deliveries = new ArrayList<>();
 
 		for(Delivery d: fourDeliveries)
@@ -285,10 +244,6 @@ public class Test2020 {
 		});
 
 
-		//for(int i = 0; i < deliveries.size(); i++)
-		//	System.out.println(deliveries.get(i).getPizzas() + " " +  deliveries.get(i).toStringIndex() + " Score: " + deliveries.get(i).getScore());
-
-
 		ArrayList<Delivery> finalDeliveries = new ArrayList<>();
 
 		//Get first Delivery
@@ -301,9 +256,6 @@ public class Test2020 {
 
 
 		pizzaNumber -= deliveries.get(0).getPizzas();
-
-
-
 
 		for (Delivery d : deliveries) {
 			if(twoMemberTeam <= 0 && d.pizzas.size() == 2 || threeMemberTeam <= 0 && d.pizzas.size() == 3 || fourMemberTeam <= 0 && d.pizzas.size() == 4)
@@ -339,35 +291,16 @@ public class Test2020 {
 
 
 		// FINAL OUTPUT
+		System.out.println("FINAL OUTPUT");
 		int finalScore = 0;
 		for(int i = 0; i < finalDeliveries.size(); i++)
 			finalScore += Math.pow(finalDeliveries.get(i).getScore(),2);
 		System.out.println("Final Score: " + finalScore);
-
-		System.out.println("FINAL OUTPUT");
-		System.out.println(finalDeliveries.size());
-		//for(int i = 0; i < finalDeliveries.size(); i++)
-		//	System.out.println(finalDeliveries.get(i).getPizzas() + " " +  finalDeliveries.get(i).toStringIndex());
-
-
+		System.out.println("Number of deliveries: " + finalDeliveries.size());
 
 		// Write the file
-		FileWriter myWriter = null;
-		try {
-			myWriter = new FileWriter(outPath + "output.txt");
+		writeOutputFile(outPath, finalDeliveries);
 
-			// Number of teams
-			myWriter.write(finalDeliveries.size() + "");
-			for(int i = 0; i < finalDeliveries.size(); i++)
-				myWriter.write("\n" + finalDeliveries.get(i).getPizzas() + " " +  finalDeliveries.get(i).toStringIndex());
-
-			myWriter.close();
-			System.out.println("Successfully wrote to the file.");
-		}
-		catch (IOException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
 	}
 }
 	
