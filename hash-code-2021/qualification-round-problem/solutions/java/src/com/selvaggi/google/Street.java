@@ -7,6 +7,7 @@ public class Street {
     public int start_intersection;
     public int end_intersection;
     public boolean isGreen;
+    public int queueLength = 0;
 
     public Street() {
 
