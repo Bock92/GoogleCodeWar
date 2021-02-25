@@ -6,6 +6,6 @@ public class OutPut {
 
 
     public String toString() {
-
+        return "";
     }
 }

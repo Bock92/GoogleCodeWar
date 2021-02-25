@@ -6,10 +6,12 @@ import java.util.HashMap;
 public class World {
     public HashMap<String, Street> streets;
     public ArrayList<Car> cars;
+    public HashMap<Integer, Intersection> intersections;
     public int t = 0;
 
     public World() {
         this.streets = new HashMap<>();
+        this.intersections = new HashMap<>();
     }
 
     public Street getStreetByName(String streetName) {
@@ -20,8 +22,15 @@ public class World {
         this.streets.put(street.name, street);
     }
 
+    public Intersection getIntersectionById(int id) {
+        return this.intersections.get(id);
+    }
+
+    public void addIntersection(Intersection intersection) {
+        this.intersections.put(intersection.id, intersection);
+    }
+
     public void update() {
-        t++;
         for(Car c: cars) {
             Street currentStreet = c.streets.get(c.currentStreet);
             if(c.isWaiting && currentStreet.isGreen) {
@@ -51,6 +60,7 @@ public class World {
     }
 
     public void updateTrafficLight() {
+
         
     }
 }
