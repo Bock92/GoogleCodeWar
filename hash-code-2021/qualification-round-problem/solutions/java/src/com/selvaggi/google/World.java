@@ -2,16 +2,17 @@ package com.selvaggi.google;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class World {
     public HashMap<String, Street> streets;
     public ArrayList<Car> cars;
-    public HashMap<Integer, Intersection> intersections;
+    public ArrayList<Intersection> intersections;
     public int t = 0;
 
     public World() {
         this.streets = new HashMap<>();
-        this.intersections = new HashMap<>();
+        this.intersections = new ArrayList<>();
     }
 
     public Street getStreetByName(String streetName) {
@@ -20,14 +21,6 @@ public class World {
 
     public void addStreet(Street street ) {
         this.streets.put(street.name, street);
-    }
-
-    public Intersection getIntersectionById(int id) {
-        return this.intersections.get(id);
-    }
-
-    public void addIntersection(Intersection intersection) {
-        this.intersections.put(intersection.id, intersection);
     }
 
     public void update() {
@@ -60,7 +53,7 @@ public class World {
     }
 
     public void updateTrafficLight() {
-
         
+
     }
 }
