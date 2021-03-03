@@ -10,4 +10,12 @@ public class Intersection {
     public Intersection() {
         streets = new ArrayList<>();
     }
+
+    public int getTotalGreenSeconds(){
+        int totalGreenSeconds = 0;
+        for(Street street: streets) {
+            totalGreenSeconds = street.greenSeconds;
+        }
+        return totalGreenSeconds;
+    }
 }

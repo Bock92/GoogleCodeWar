@@ -79,7 +79,8 @@ public class World {
     public int getNIntersection() {
         int count = 0;
         for(Intersection i: intersections) {
-            if(i.isTouch) {
+            //if(i.isTouch) {
+            if(i.getTotalGreenSeconds() > 0){
                 count++;
             }
         }
