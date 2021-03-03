@@ -128,23 +128,15 @@ public class Qualification2021 {
 			myWriter.write(world.getNIntersection() + "\n");
 
 			for(Intersection intersect: world.intersections) {
-<<<<<<< Updated upstream
-
-=======
 				if(intersect.getTotalGreenSeconds() == 0)
 					continue;
->>>>>>> Stashed changes
 				myWriter.write(intersect.id + "\n");
 				myWriter.write(world.getNStreets(intersect) + "\n");
 				// id
 				// street => name secondi
 				for(Street street: intersect.streets) {
 					if(street.greenSeconds > 0) {
-<<<<<<< Updated upstream
-						myWriter.write("\n" + street.name + " " + street.greenSeconds);
-=======
 						myWriter.write(street.name + " " + street.greenSeconds + "\n");
->>>>>>> Stashed changes
 					}
 				}
 
