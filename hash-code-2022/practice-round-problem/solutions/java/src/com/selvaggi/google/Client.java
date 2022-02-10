@@ -21,8 +21,10 @@ public class Client {
         dislikedIngredients.add(i);
     }
 
-    /*
-    Restituisce 1 se l'ingrediente è piaciuto, -1 se non è piaciuto, 0 se non è neutro.
+    /**
+    * Restituisce 1 se l'ingrediente è piaciuto, -1 se non è piaciuto, 0 se non è neutro.
+     * @param ingredient L'ingrediente di cui si vuole sapere il punteggio
+     * @return Il punteggio dell'ingrediente
      */
     public int getIngredientScore(Ingredient ingredient){
 
