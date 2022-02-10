@@ -48,6 +48,9 @@ public class Pizzeria {
      */
     public Pizza cookPizza(int minScore){
 
+        // Reset pizza;
+        pizza = new Pizza();
+
         // Ordina gli ingredienti per punteggio.
         sortIngredientsByScore();
 
@@ -96,6 +99,43 @@ public class Pizzeria {
         return false;
     }
 
+    public int getScore(){
+
+        int score = 0;
+
+        for (Client c: clients) {
+
+            boolean skipClient = false;
+            for(int i = 0; i < c.dislikedIngredients.size(); i++){
+
+                if(pizza.ingredients.contains(c.dislikedIngredients.get(i)))
+                    skipClient = true;
+            }
+
+            if(skipClient)
+                continue;
+            else {
+
+                boolean allLiked = false;
+
+                for(int i = 0; i < c.likedIngredients.size(); i++){
+
+                    if(pizza.ingredients.contains(c.likedIngredients.get(i)))
+                        allLiked = true;
+                    else {
+
+                        allLiked = false;
+                        break;
+                    }
+                }
+
+                if(allLiked)
+                    score++;
+            }
+        }
+
+        return score;
+    }
 
     public String toString(){
 

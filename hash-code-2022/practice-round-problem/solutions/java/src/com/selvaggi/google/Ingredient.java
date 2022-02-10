@@ -5,7 +5,7 @@ public class Ingredient {
     public String name;
     public int liked_clients;
     public int disliked_clients;
-    public int score;
+    public double score;
 
     public Ingredient(String ingredientName){
         name = ingredientName;
@@ -17,17 +17,23 @@ public class Ingredient {
         liked_clients++;
     }
 
-    public void addDislike(){
-        disliked_clients++;
-    }
+    public void addDislike(){ disliked_clients++; }
 
-    public int getScore(){
-        score = liked_clients - disliked_clients;
+    public double getScore(){
+        score = liked_clients * 0.4 - disliked_clients * 0.6;
         return score;
     }
 
-    public boolean equals(Ingredient i){
-        return i.name.equals(this.name);
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof Ingredient){
+            Ingredient ptr = (Ingredient) v;
+            retVal = ptr.name.equals(this.name);
+        }
+
+        return retVal;
     }
 
     public String toString(){

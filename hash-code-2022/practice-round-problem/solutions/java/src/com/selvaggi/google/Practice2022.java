@@ -148,10 +148,33 @@ public class Practice2022 {
 
         //System.out.println(pizzeria.toString());
 
-        pizza = pizzeria.cookPizza(1);
+        int minScore = -numberOfCustomer/40;
+        int maxScore = numberOfCustomer/40;
+        int finalScore = 0;
+        int finalScoreIdx = 0;
+        Pizza perfectPizza = new Pizza();
+        for(int i = minScore; i < maxScore; i++){
+
+            pizza = pizzeria.cookPizza(i);
+            int tmpScore = pizzeria.getScore();
+
+            System.out.println("i: " + i);
+
+            if(tmpScore > finalScore){
+
+                finalScoreIdx = i;
+                finalScore = tmpScore;
+                perfectPizza = pizza;
+            }
+        }
+
+        System.out.println("Final index: " + finalScoreIdx + "\n");
+        pizzeria.pizza = perfectPizza;
 
         //System.out.println("Output:");
-        //System.out.println(pizza.getOutput());
+        //System.out.println(perfectPizza.getOutput());
+
+        System.out.println("Score: " + pizzeria.getScore());
 
         // Write the file
         writeOutputFile(outPath, fileName);
