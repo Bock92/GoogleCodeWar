@@ -26,5 +26,8 @@ public class Ingredient {
         return score;
     }
 
+    public boolean equals(Ingredient i){
+        return i.name.equals(this.name);
+    }
 
 }
