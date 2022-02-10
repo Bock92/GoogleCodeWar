@@ -16,7 +16,8 @@ public class Pizzeria {
     }
 
     public void addIngredient(Ingredient i, boolean liked){
-        if(!ingredients.contains(i)){
+
+        if(!containsIngredient(i.name)){
             if(liked)
                 i.addLike();
             else
@@ -75,6 +76,24 @@ public class Pizzeria {
                 return 0;
             }
         });
+    }
+
+    /**
+     * Verifica se l'ingrediente è già stato aggiunto
+     * @param name Il nome dell'ingrediente
+     * @return true se è contenuto, false altrimenti
+     */
+    private boolean containsIngredient(String name){
+
+        for(int i = 0; i < ingredients.size(); i++){
+
+            if(ingredients.get(i).name.equals(name)){
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
