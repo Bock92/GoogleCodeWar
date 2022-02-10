@@ -13,6 +13,14 @@ public class Client {
         dislikedIngredients = new ArrayList<>();
     }
 
+    public void addLikedIngredient(Ingredient i){
+        likedIngredients.add(i);
+    }
+
+    public void addDislikedIngredient(Ingredient i){
+        dislikedIngredients.add(i);
+    }
+
     /*
     Restituisce 1 se l'ingrediente è piaciuto, -1 se non è piaciuto, 0 se non è neutro.
      */
