@@ -49,31 +49,41 @@ public class Practice2022 {
 			String test = myReader.nextLine();
 			//System.out.println(test);
 
-            boolean likedIngredient = true;
+
             // Read First Line
-			Client c = new Client();
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                Scanner myLine = new Scanner(data);
 
-                //System.out.println(data);
-				int numberOfIngredients = myLine.nextInt();
+            //while (myReader.hasNextLine()) {
+            for (int i = 0; i < numberOfCustomer; i++){
+                Client c = new Client();
 
+                // Read Like Line
+                String likeLine = myReader.nextLine();
+                //System.out.println(likeLine);
+                Scanner myLine = new Scanner(likeLine);
+				int numberOfLikedIngredients = myLine.nextInt();
                 while (myLine.hasNext()) {
-
-                    Ingredient newIngredient = new Ingredient(myLine.next());
-                    if (likedIngredient) {
-						c = new Client();
-						c.addLikedIngredient(newIngredient);
-					}
-                    else {
-                        c.addDislikedIngredient(newIngredient);
-                        pizzeria.addClient(c);
-                    }
-
-                    pizzeria.addIngredient(newIngredient, likedIngredient);
+                    String ingredientName = myLine.next();
+                    Ingredient newIngredient = new Ingredient(ingredientName);
+                    c.addLikedIngredient(newIngredient);
+                    //System.out.println("Like Ingredient: " + ingredientName);
+                    pizzeria.addIngredient(newIngredient, true);
                 }
-                likedIngredient = !likedIngredient;
+
+                // Read Dislike Line
+                String dislikeLine = myReader.nextLine();
+                //System.out.println(dislikeLine);
+                Scanner myDislikeLine = new Scanner(dislikeLine);
+                int numberOfDislikedIngredients = myDislikeLine.nextInt();
+                while (myDislikeLine.hasNext()) {
+                    String ingredientName = myDislikeLine.next();
+                    Ingredient newIngredient = new Ingredient(ingredientName);
+                    c.addDislikedIngredient(newIngredient);
+                    //System.out.println("Dislike Ingredient: " + ingredientName);
+                    pizzeria.addIngredient(newIngredient, false);
+                }
+
+                //System.out.println(c.toString());
+                pizzeria.addClient(c);
 
                 myLine.close();
             }
