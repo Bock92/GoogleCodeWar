@@ -143,7 +143,11 @@ public class Practice2022 {
         // Read the input file
         readInputFile(filePath, fileName);
 
-        System.out.println(pizzeria.toString());
+        //System.out.println(pizzeria.toString());
+
+        Pizza p = pizzeria.cookPizza(1);
+
+        System.out.println(p.toString());
 
 
         // Write the file

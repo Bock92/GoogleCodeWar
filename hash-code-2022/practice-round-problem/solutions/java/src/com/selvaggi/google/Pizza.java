@@ -10,4 +10,12 @@ public class Pizza {
 
         ingredients = new ArrayList<>();
     }
+
+    public String toString() {
+        String output = "Pizza size: " + ingredients.size() + "\n";
+        for (Ingredient i: ingredients) {
+            output = output + i.toString() + "\n";
+        }
+        return  output;
+    }
 }
