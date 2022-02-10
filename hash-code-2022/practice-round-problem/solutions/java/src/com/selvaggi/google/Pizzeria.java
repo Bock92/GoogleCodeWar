@@ -76,4 +76,18 @@ public class Pizzeria {
             }
         });
     }
+
+
+    public String toString(){
+
+        String output = "Clients:\n";
+        for (Client c: clients             ) {
+            output = output + c.toString() + "\n";
+        }
+        output = output +"\nIngredients:\n";
+        for (Ingredient i: ingredients             ) {
+            output = output + i.toString() + "\n";
+        }
+        return output;
+    }
 }

@@ -35,4 +35,8 @@ public class Client {
         else
             return 0;
     }
+
+    public String toString(){
+        return "Liked ingredients: " + likedIngredients.size() + " Disliked Ingredients: " + dislikedIngredients.size();
+    }
 }

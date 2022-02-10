@@ -56,7 +56,7 @@ public class Practice2022 {
                 String data = myReader.nextLine();
                 Scanner myLine = new Scanner(data);
 
-                System.out.println(data);
+                //System.out.println(data);
 				int numberOfIngredients = myLine.nextInt();
 
                 while (myLine.hasNext()) {
@@ -66,8 +66,11 @@ public class Practice2022 {
 						c = new Client();
 						c.addLikedIngredient(newIngredient);
 					}
-                    else
-						c.addDislikedIngredient(newIngredient);
+                    else {
+                        c.addDislikedIngredient(newIngredient);
+                        pizzeria.addClient(c);
+                    }
+
                     pizzeria.addIngredient(newIngredient, likedIngredient);
                 }
                 likedIngredient = !likedIngredient;
@@ -129,6 +132,8 @@ public class Practice2022 {
 
         // Read the input file
         readInputFile(filePath, fileName);
+
+        System.out.println(pizzeria.toString());
 
 
         // Write the file

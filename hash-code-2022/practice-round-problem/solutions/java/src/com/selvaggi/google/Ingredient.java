@@ -30,4 +30,7 @@ public class Ingredient {
         return i.name.equals(this.name);
     }
 
+    public String toString(){
+        return name + " Like: " + liked_clients + " Dislike: " + disliked_clients + " Score: " + getScore();
+    }
 }
