@@ -1,3 +1,0 @@
-# GoogleCodeWar
-
-# Typescript solution

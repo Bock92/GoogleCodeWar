@@ -18,6 +18,7 @@ public class Practice2022 {
     //static ArrayList<Street> streets;
     static Pizzeria pizzeria;
     static Pizza pizza;
+    static Pizza perfectPizza;
 
     static int numberOfCustomer = 0;
 
@@ -101,7 +102,7 @@ public class Practice2022 {
         try {
             myWriter = new FileWriter(outPath + fileName + "_out.txt");
 
-            myWriter.write(pizza.getOutput());
+            myWriter.write(perfectPizza.getOutput());
 
 
 /*
@@ -148,11 +149,22 @@ public class Practice2022 {
 
         //System.out.println(pizzeria.toString());
 
-        int minScore = -numberOfCustomer/40;
-        int maxScore = numberOfCustomer/40;
+        int minScore = 0;
+        int maxScore = 0;
+        int divider = 40;
+        if(numberOfCustomer > divider){
+
+            minScore = -numberOfCustomer/divider;
+            maxScore = numberOfCustomer/divider;
+        } else {
+
+            minScore = -numberOfCustomer;
+            maxScore = numberOfCustomer;
+        }
+
         int finalScore = 0;
         int finalScoreIdx = 0;
-        Pizza perfectPizza = new Pizza();
+        perfectPizza = new Pizza();
         for(int i = minScore; i < maxScore; i++){
 
             pizza = pizzeria.cookPizza(i);
