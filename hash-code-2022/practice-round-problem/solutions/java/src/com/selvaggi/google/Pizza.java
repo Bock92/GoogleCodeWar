@@ -18,4 +18,13 @@ public class Pizza {
         }
         return  output;
     }
+
+    public String getOutput(){
+        String output =  ingredients.size() + "";
+
+        for (Ingredient i: ingredients)
+            output = output + " " + i.name;
+
+        return output;
+    }
 }

@@ -17,6 +17,7 @@ public class Practice2022 {
 
     //static ArrayList<Street> streets;
     static Pizzeria pizzeria;
+    static Pizza pizza;
 
     static int numberOfCustomer = 0;
 
@@ -95,10 +96,12 @@ public class Practice2022 {
         }
     }
 
-    private static void writeOutputFile(String outPath, String fileName, World world) {
+    private static void writeOutputFile(String outPath, String fileName) {
         FileWriter myWriter = null;
         try {
             myWriter = new FileWriter(outPath + fileName + "_out.txt");
+
+            myWriter.write(pizza.getOutput());
 
 
 /*
@@ -145,13 +148,13 @@ public class Practice2022 {
 
         //System.out.println(pizzeria.toString());
 
-        Pizza p = pizzeria.cookPizza(1);
+        pizza = pizzeria.cookPizza(1);
 
-        System.out.println(p.toString());
-
+        //System.out.println("Output:");
+        //System.out.println(pizza.getOutput());
 
         // Write the file
-        //writeOutputFile(outPath, fileName, world);
+        writeOutputFile(outPath, fileName);
 
     }
 }
