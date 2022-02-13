@@ -150,12 +150,12 @@ public class Practice2022 {
         // Read the input file
         readInputFile(filePath, fileName);
 
-        /*
-        for (Ingredient i: pizza.ingredients) {
+
+        for (Ingredient i: pizzeria.ingredients) {
             System.out.println(i.toStringClients());
         }
-        */
-        
+
+
 
 
         int numberOfIngredients = pizzeria.ingredients.size();

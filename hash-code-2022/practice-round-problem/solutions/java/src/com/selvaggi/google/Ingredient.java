@@ -57,6 +57,14 @@ public class Ingredient {
 
 
     public String toStringClients(){
-        return "Ingredient Name: " + name +" Likes: " + likedClients.size() + " Dislikes: " + dislikedClients.size();
+        String likedClientsString = "";
+        for (Client c: likedClients)
+            likedClientsString = likedClientsString + " "+ c.clientId;
+
+        String dislikedClientsString = "";
+        for (Client c: dislikedClients)
+            dislikedClientsString = dislikedClientsString + " "+ c.clientId;
+
+        return name +" | Like List: " + likedClientsString + " | Dislikes List: " + dislikedClientsString;
     }
 }
