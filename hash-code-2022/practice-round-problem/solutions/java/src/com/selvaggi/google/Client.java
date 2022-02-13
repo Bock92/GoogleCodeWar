@@ -6,11 +6,17 @@ public class Client {
 
     public ArrayList<Ingredient> likedIngredients;
     public ArrayList<Ingredient> dislikedIngredients;
+    public int clientId;
 
     Client(){
-
         likedIngredients = new ArrayList<>();
         dislikedIngredients = new ArrayList<>();
+    }
+
+    Client(int id){
+        likedIngredients = new ArrayList<>();
+        dislikedIngredients = new ArrayList<>();
+        clientId = id;
     }
 
     public void addLikedIngredient(Ingredient i){
@@ -34,6 +40,18 @@ public class Client {
             return -1;
         else
             return 0;
+    }
+
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof Client){
+            Client ptr = (Client) v;
+            retVal = ptr.clientId == this.clientId;
+        }
+
+        return retVal;
     }
 
     public String toString(){

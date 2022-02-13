@@ -15,22 +15,30 @@ public class Pizzeria {
         pizza = new Pizza();
     }
 
-    public void addIngredient(Ingredient i, boolean liked){
+    public void addIngredient(Ingredient i, boolean liked, Client c){
 
         if(!containsIngredient(i.name)){
-            if(liked)
+            if(liked) {
                 i.addLike();
-            else
+                i.addLikedClient(c);
+            }
+            else {
                 i.addDislike();
+                i.addLikedClient(c);
+            }
             ingredients.add(i);
         }
         else {
             for (Ingredient j: ingredients) {
                 if(j.equals(i)){
-                    if(liked)
+                    if(liked) {
                         j.addLike();
-                    else
+                        j.addLikedClient(c);
+                    }
+                    else {
                         j.addDislike();
+                        j.addDislikedClient(c);
+                    }
                     break;
                 }
             }

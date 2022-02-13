@@ -56,7 +56,8 @@ public class Practice2022 {
 
             //while (myReader.hasNextLine()) {
             for (int i = 0; i < numberOfCustomer; i++){
-                Client c = new Client();
+                Client c = new Client(i);
+
 
                 // Read Like Line
                 String likeLine = myReader.nextLine();
@@ -68,7 +69,8 @@ public class Practice2022 {
                     Ingredient newIngredient = new Ingredient(ingredientName);
                     c.addLikedIngredient(newIngredient);
                     //System.out.println("Like Ingredient: " + ingredientName);
-                    pizzeria.addIngredient(newIngredient, true);
+                    pizzeria.addIngredient(newIngredient, true, c);
+                    //newIngredient.addLikedClient(c);
                 }
 
                 // Read Dislike Line
@@ -81,7 +83,8 @@ public class Practice2022 {
                     Ingredient newIngredient = new Ingredient(ingredientName);
                     c.addDislikedIngredient(newIngredient);
                     //System.out.println("Dislike Ingredient: " + ingredientName);
-                    pizzeria.addIngredient(newIngredient, false);
+                    pizzeria.addIngredient(newIngredient, false, c);
+                    //newIngredient.addDislikedClient(c);
                 }
 
                 //System.out.println(c.toString());
@@ -147,30 +150,41 @@ public class Practice2022 {
         // Read the input file
         readInputFile(filePath, fileName);
 
+        /*
+        for (Ingredient i: pizza.ingredients) {
+            System.out.println(i.toStringClients());
+        }
+        */
+        
+
+
+        int numberOfIngredients = pizzeria.ingredients.size();
+        System.out.println("Number of ingredients: " + numberOfIngredients);
+
         //System.out.println(pizzeria.toString());
 
         int minScore = 0;
         int maxScore = 0;
         int divider = 40;
-        if(numberOfCustomer > divider){
+        if(numberOfIngredients > divider){
 
-            minScore = -numberOfCustomer/divider;
-            maxScore = numberOfCustomer/divider;
+            minScore = -numberOfIngredients/divider;
+            maxScore = numberOfIngredients/divider;
         } else {
 
-            minScore = -numberOfCustomer;
-            maxScore = numberOfCustomer;
+            minScore = -numberOfIngredients;
+            maxScore = numberOfIngredients;
         }
 
         int finalScore = 0;
         int finalScoreIdx = 0;
         perfectPizza = new Pizza();
-        for(int i = minScore; i < maxScore; i++){
+        for(int i = minScore; i <= maxScore; i++){
 
             pizza = pizzeria.cookPizza(i);
             int tmpScore = pizzeria.getScore();
 
-            System.out.println("i: " + i);
+            System.out.print("\ri: " + i + " of " + maxScore);
 
             if(tmpScore > finalScore){
 
@@ -180,7 +194,7 @@ public class Practice2022 {
             }
         }
 
-        System.out.println("Final index: " + finalScoreIdx + "\n");
+        System.out.println("\n\nFinal index: " + finalScoreIdx);
         pizzeria.pizza = perfectPizza;
 
         //System.out.println("Output:");
