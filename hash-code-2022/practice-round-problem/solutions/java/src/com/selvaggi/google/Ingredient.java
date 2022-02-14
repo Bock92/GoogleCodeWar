@@ -28,15 +28,27 @@ public class Ingredient {
         dislikedClients.add(c);
     }
 
+    public boolean removeLikeClient(Client clientToRemove){
+                return likedClients.remove(clientToRemove);
+    }
+
+    public boolean removeDislikeClient(Client clientToRemove){
+        return dislikedClients.remove(clientToRemove);
+    }
+
     public void addLike(){
         liked_clients++;
     }
 
     public void addDislike(){ disliked_clients++; }
 
-    public double getScore(){
-        score = liked_clients * 0.4 - disliked_clients * 0.6;
+    public double getScore(double likeBalance){
+        score = liked_clients * likeBalance - disliked_clients * (1 - likeBalance);
         return score;
+    }
+
+    public double getScore(){
+        return likedClients.size() - dislikedClients.size();
     }
 
     @Override
@@ -52,7 +64,7 @@ public class Ingredient {
     }
 
     public String toString(){
-        return name + " Like: " + liked_clients + " Dislike: " + disliked_clients + " Score: " + getScore();
+        return name + " Like: " + likedClients.size() + " Dislike: " + dislikedClients.size() + " Score: " + getScore();
     }
 
 

@@ -72,6 +72,63 @@ public class Pizzeria {
         return pizza;
     }
 
+    public Pizza cookPerfectPizza(){
+
+        // Reset pizza;
+        pizza = new Pizza();
+
+        // Copy ingredients
+        ArrayList<Ingredient> tmpIngredients = new ArrayList<>();
+        tmpIngredients.addAll(ingredients);
+
+
+        // Ordina gli ingredienti per punteggio.
+        sortIngredientsByScoreDesc(tmpIngredients);
+
+        Ingredient ingredientToAdd = tmpIngredients.get(0);
+        pizza.ingredients.add(ingredientToAdd);
+
+        System.out.println(toStringIngredients(tmpIngredients));
+        // Removed clients
+        removeIngredient(tmpIngredients, ingredientToAdd);
+
+        System.out.println(toStringIngredients(tmpIngredients));
+
+
+        return pizza;
+    }
+
+    public void removeIngredient(ArrayList<Ingredient> ingredientList, Ingredient ingredientToRemove){
+
+   /*     // Remove all liked customers
+        for (Client c: ingredientToRemove.likedClients) {
+            for (Ingredient i: ingredientList) {
+                i.likedClients.remove(c);
+            }
+        }*/
+ /*       // Remove all disliked customers
+        for (Client c: ingredientToRemove.dislikedClients) {
+            for (Ingredient i: ingredientList) {
+                i.dislikedClients.remove(c);
+            }
+        }
+*/
+        ingredientList.remove(ingredientToRemove);
+    }
+
+    public static void sortIngredientsByScoreDesc(ArrayList<Ingredient> ingredientList){
+        Collections.sort(ingredientList, new Comparator<Ingredient>() {
+            @Override
+            public int compare(Ingredient i, Ingredient j) {
+                if (i.getScore() < j.getScore())
+                    return 1;
+                if (i.getScore() > j.getScore())
+                    return -1;
+                return 0;
+            }
+        });
+    }
+
     /**
      * Ordina gli ingredienti per punteggio.
      */
@@ -153,6 +210,14 @@ public class Pizzeria {
         }
         output = output +"\nIngredients:\n";
         for (Ingredient i: ingredients             ) {
+            output = output + i.toString() + "\n";
+        }
+        return output;
+    }
+
+    public String toStringIngredients(ArrayList<Ingredient> ingredientList){
+        String output = "Ingredients:\n";
+        for (Ingredient i: ingredientList) {
             output = output + i.toString() + "\n";
         }
         return output;
