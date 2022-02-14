@@ -24,7 +24,7 @@ public class Pizzeria {
             }
             else {
                 i.addDislike();
-                i.addLikedClient(c);
+                i.addDislikedClient(c);
             }
             ingredients.add(i);
         }
