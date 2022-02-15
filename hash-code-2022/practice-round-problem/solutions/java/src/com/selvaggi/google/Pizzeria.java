@@ -85,7 +85,7 @@ public class Pizzeria {
         // Ordina gli ingredienti per punteggio.
         sortIngredientsByScoreDesc(tmpIngredients);
 
-        Ingredient ingredientToAdd = tmpIngredients.get(0);
+        Ingredient ingredientToAdd = tmpIngredients.get(2);
         pizza.ingredients.add(ingredientToAdd);
 
         System.out.println(toStringIngredients(tmpIngredients));
@@ -100,20 +100,26 @@ public class Pizzeria {
 
     public void removeIngredient(ArrayList<Ingredient> ingredientList, Ingredient ingredientToRemove){
 
-   /*     // Remove all liked customers
+        ingredientList.remove(ingredientToRemove);
+        // Remove all liked customers
         for (Client c: ingredientToRemove.likedClients) {
             for (Ingredient i: ingredientList) {
                 i.likedClients.remove(c);
             }
-        }*/
- /*       // Remove all disliked customers
+        }
+        // Remove all disliked customers
         for (Client c: ingredientToRemove.dislikedClients) {
             for (Ingredient i: ingredientList) {
                 i.dislikedClients.remove(c);
             }
         }
-*/
-        ingredientList.remove(ingredientToRemove);
+
+        // Remove all disliked customers from likedClients
+        for (Client c: ingredientToRemove.dislikedClients) {
+            for (Ingredient i: ingredientList) {
+                i.likedClients.remove(c);
+            }
+        }
     }
 
     public static void sortIngredientsByScoreDesc(ArrayList<Ingredient> ingredientList){

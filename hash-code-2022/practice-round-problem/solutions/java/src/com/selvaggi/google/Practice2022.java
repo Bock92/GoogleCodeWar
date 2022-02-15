@@ -169,7 +169,7 @@ public class Practice2022 {
 
 
 
-
+/*
         int minScore = 0;
         int maxScore = 0;
         int divider = 40;
@@ -208,7 +208,7 @@ public class Practice2022 {
         //System.out.println(perfectPizza.getOutput());
 
         System.out.println("Final Pizza Score: " + pizzeria.getScore());
-
+*/
         // Write the file
         //writeOutputFile(outPath, fileName);
 
