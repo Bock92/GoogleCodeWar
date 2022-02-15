@@ -81,32 +81,38 @@ public class Pizzeria {
         ArrayList<Ingredient> tmpIngredients = new ArrayList<>();
         tmpIngredients.addAll(ingredients);
 
+        //System.out.println("Pre remove\n" + toStringIngredients(tmpIngredients));
 
-        // Ordina gli ingredienti per punteggio.
-        sortIngredientsByScoreDesc(tmpIngredients);
+        double currentIngredientScore = 1;
+        while(tmpIngredients.size() > 0 && currentIngredientScore > 0) {
+            // Ordina gli ingredienti per punteggio.
+            sortIngredientsByScoreDesc(tmpIngredients);
 
-        Ingredient ingredientToAdd = tmpIngredients.get(2);
-        pizza.ingredients.add(ingredientToAdd);
-
-        System.out.println(toStringIngredients(tmpIngredients));
-        // Removed clients
-        removeIngredient(tmpIngredients, ingredientToAdd);
-
-        System.out.println(toStringIngredients(tmpIngredients));
+            // Take the first ingredient
+            Ingredient ingredientToAdd = tmpIngredients.get(0);
+            currentIngredientScore = ingredientToAdd.getScore();
+            //System.out.println("Current Ingredient Score: " + currentIngredientScore);
+            pizza.ingredients.add(ingredientToAdd);
 
 
+            // Removed clients
+            removeIngredient(tmpIngredients, ingredientToAdd);
+
+            //System.out.println("Post remove\n" + toStringIngredients(tmpIngredients));
+        }
         return pizza;
     }
 
     public void removeIngredient(ArrayList<Ingredient> ingredientList, Ingredient ingredientToRemove){
 
         ingredientList.remove(ingredientToRemove);
+        /*
         // Remove all liked customers
         for (Client c: ingredientToRemove.likedClients) {
             for (Ingredient i: ingredientList) {
                 i.likedClients.remove(c);
             }
-        }
+        }*/
         // Remove all disliked customers
         for (Client c: ingredientToRemove.dislikedClients) {
             for (Ingredient i: ingredientList) {

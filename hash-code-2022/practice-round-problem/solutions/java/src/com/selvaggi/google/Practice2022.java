@@ -100,34 +100,13 @@ public class Practice2022 {
         }
     }
 
-    private static void writeOutputFile(String outPath, String fileName) {
+    private static void writeOutputFile(String outPath, String fileName, String outputBody) {
         FileWriter myWriter = null;
         try {
             myWriter = new FileWriter(outPath + fileName + "_out.txt");
 
-            myWriter.write(perfectPizza.getOutput());
+            myWriter.write(outputBody);
 
-
-/*
-			// Number of teams
-			myWriter.write(world.getNIntersection() + "\n");
-
-			for(Intersection intersect: world.intersections) {
-				if(intersect.getTotalGreenSeconds() == 0)
-					continue;
-				myWriter.write(intersect.id + "\n");
-				myWriter.write(world.getNStreets(intersect) + "\n");
-				// id
-				// street => name secondi
-				for(Street street: intersect.streets) {
-					if(street.greenSeconds > 0) {
-						myWriter.write(street.name + " " + street.greenSeconds + "\n");
-					}
-				}
-
-				myWriter.write("\n");
-			}
-*/
             myWriter.close();
             System.out.println("Successfully wrote to the file: " + outPath + fileName + "_out.txt");
         } catch (IOException e) {
@@ -150,68 +129,15 @@ public class Practice2022 {
         // Read the input file
         readInputFile(filePath, fileName);
 
-
-
-
-
         int numberOfIngredients = pizzeria.ingredients.size();
         System.out.println("Number of ingredients: " + numberOfIngredients);
 
-        /*
-        for (Ingredient i: pizzeria.ingredients)
-            System.out.println(i.toStringClients());
-        */
-
-
-        //System.out.println(pizzeria.toString());
-
-        pizzeria.cookPerfectPizza();
-
-
-
-/*
-        int minScore = 0;
-        int maxScore = 0;
-        int divider = 40;
-        if(numberOfIngredients > divider){
-
-            minScore = -numberOfIngredients/divider;
-            maxScore = numberOfIngredients/divider;
-        } else {
-
-            minScore = -numberOfIngredients;
-            maxScore = numberOfIngredients;
-        }
-
-        int finalScore = 0;
-        int finalScoreIdx = 0;
-        perfectPizza = new Pizza();
-        for(int i = minScore; i <= maxScore; i++){
-
-            pizza = pizzeria.cookPizza(i);
-            int tmpScore = pizzeria.getScore();
-
-            System.out.print("\ri: " + i + " of " + maxScore);
-
-            if(tmpScore > finalScore){
-
-                finalScoreIdx = i;
-                finalScore = tmpScore;
-                perfectPizza = pizza;
-            }
-        }
-
-        System.out.println("\n\nFinal index: " + finalScoreIdx);
-        pizzeria.pizza = perfectPizza;
-
-        //System.out.println("Output:");
-        //System.out.println(perfectPizza.getOutput());
+        pizzeria.pizza = pizzeria.cookPerfectPizza();
 
         System.out.println("Final Pizza Score: " + pizzeria.getScore());
-*/
-        // Write the file
-        //writeOutputFile(outPath, fileName);
 
+        // Write the file
+        writeOutputFile(outPath, fileName, pizzeria.pizza.getOutput());
     }
 }
 	
