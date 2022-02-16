@@ -83,8 +83,17 @@ public class Pizzeria {
 
         //System.out.println("Pre remove\n" + toStringIngredients(tmpIngredients));
 
+        // Add ingredients without dislikes
+        for (Ingredient i: tmpIngredients) {
+            if(i.dislikedClients.size() == 0)
+                pizza.ingredients.add(i);
+        }
+        for (Ingredient i: pizza.ingredients)
+            removeIngredient(tmpIngredients, i);
+
+
         double currentIngredientScore = 1;
-        while(tmpIngredients.size() > 0 && currentIngredientScore > 0) {
+        while(tmpIngredients.size() > 0 && currentIngredientScore >= 0) {
             // Ordina gli ingredienti per punteggio.
             sortIngredientsByScoreDesc(tmpIngredients);
 
@@ -93,7 +102,6 @@ public class Pizzeria {
             currentIngredientScore = ingredientToAdd.getScore();
             //System.out.println("Current Ingredient Score: " + currentIngredientScore);
             pizza.ingredients.add(ingredientToAdd);
-
 
             // Removed clients
             removeIngredient(tmpIngredients, ingredientToAdd);
@@ -136,10 +144,17 @@ public class Pizzeria {
                     return 1;
                 if (i.getScore() > j.getScore())
                     return -1;
+
+                if(i.likedClients.size() < j.likedClients.size())
+                    return 1;
+                if(i.likedClients.size() > j.likedClients.size())
+                    return -1;
+
                 return 0;
             }
         });
     }
+
 
     /**
      * Ordina gli ingredienti per punteggio.

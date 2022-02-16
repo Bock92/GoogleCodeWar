@@ -117,8 +117,8 @@ public class Practice2022 {
 
     public static void main(String[] args) {
 
-        String filePath = "..\\..\\input_files\\";
-        String outPath = "..\\..\\output\\";
+        String filePath = "../../input_files/";
+        String outPath = "../../output/";
         String fileName = "a.txt";
 
         if (args.length > 0)
