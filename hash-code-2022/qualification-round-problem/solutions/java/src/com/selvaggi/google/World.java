@@ -23,9 +23,26 @@ public class World {
 
         while (true){
 
-            ArrayList<Contributor> tmpContributors = new ArrayList<>();
+            // Check complete projects
+
+
 
             Project currentProject = projects.get(pIdx);
+
+            ArrayList<Contributor> tmpContributor = getProjectContributors(currentProject);
+
+            if(tmpContributor == null){
+                pIdx++;
+                continue;
+            }
+
+            if(tmpContributor != null) {
+                currentProject.contributors = tmpContributor;
+                currentProject.startDay = currentDay;
+                for (Contributor c: currentProject.contributors)
+                    c.isBusy = true;
+            }
+
 
 
             // Giorno successivo
@@ -37,7 +54,7 @@ public class World {
         }
     }
 
-    public ArrayList<Contributor>  isProjectWorkable(Project project){
+    public ArrayList<Contributor>  getProjectContributors(Project project){
 
         ArrayList<Contributor> tmpContr = new ArrayList<>();
 
@@ -85,7 +102,20 @@ public class World {
 
 
     public String getOutput(){
-        return "";
+        String output = completedProjects.size() + "\n";
+
+        for (Project p : completedProjects) {
+
+            output = output + p.name + "\n";
+
+            for (Contributor c : p.contributors) {
+
+                output = output + c.name + " ";
+            }
+
+            output = output + "\n";
+        }
+        return output;
     }
 
 
