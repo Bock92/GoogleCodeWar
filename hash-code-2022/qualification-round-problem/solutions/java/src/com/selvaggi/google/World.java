@@ -14,7 +14,15 @@ public class World {
     }
 
     public void elaborate(){
-        return;
+
+        while (true){
+
+            if(currentDay > 2)
+                break;
+
+            // Giorno successivo
+            currentDay++;
+        }
     }
 
 
