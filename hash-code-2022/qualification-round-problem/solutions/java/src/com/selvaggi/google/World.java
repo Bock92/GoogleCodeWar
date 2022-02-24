@@ -4,12 +4,12 @@ import java.util.*;
 
 public class World {
 
-    public int MAX_DAY = 1000;
+    public int MAX_DAY = 10000;
 
     public int currentDay;
     public ArrayList<Project> projects;
     public ArrayList<Contributor> contributors;
-    //public ArrayList<Project> completedProjects;
+    public ArrayList<Project> completedProjects;
     //public ArrayList<Project> workingProjects;
     public int projectsInProgress;
     public int projectsDone;
@@ -17,18 +17,21 @@ public class World {
     public World() {
         this.projects = new ArrayList<>();
         this.contributors = new ArrayList<>();
-        //this.completedProjects = new ArrayList<>();
+        this.completedProjects = new ArrayList<>();
         //this.workingProjects = new ArrayList<>();
         this.projectsInProgress = 0;
         this.projectsDone = 0;
     }
 
     public void elaborate(){
-        // Copy project
-        //ArrayList<Project> projectToWork = new ArrayList<>();
-        //projectToWork.addAll(projects);
 
-        // Sort Projects
+        Collections.sort(projects, new Comparator<Project>() {
+            @Override
+            public int compare(Project p1, Project p2)
+            {
+                return  p1.bestBefore - p2.bestBefore;
+            }
+        });
 
         while (projectsDone < projects.size()  && currentDay <= MAX_DAY){
 
@@ -39,9 +42,12 @@ public class World {
                     projectsDone++;
                     projectsInProgress--;
                     p.isDone = true;
+                    p.workInProgress = false;
+                    completedProjects.add(p);
 
-                    //completedProjects.add(p);
-                    //workingProjects.remove(p);
+                    for (int i = 0; i< p.skills.size(); i++){
+                        p.contributors.get(i).upgradeSkill(p.skills.get(i));
+                    }
                     for (Contributor c:p.contributors) {
                         c.isBusy = false;
                     }
@@ -70,27 +76,11 @@ public class World {
                     }
                 }
 
-                /*
-                ArrayList<Contributor> tmpContributor = getProjectContributors(currentProject);
-                if(tmpContributor == null){
-                    pIdx++;
-                    continue;
-
-                if(tmpContributor != null) {
-                    currentProject.contributors = tmpContributor;
-                    currentProject.startDay = currentDay;
-                    workingProjects.add(currentProject);
-                    //projectToWork.remove(currentProject);
-                    pIdx = 0;
-                    for (Contributor c: currentProject.contributors)
-                        c.isBusy = true;
-
-                }                }*/
-
             }
 
             // Giorno successivo
             currentDay++;
+            System.out.print("\r Oggi è: " + currentDay);
         }
     }
 
@@ -142,23 +132,24 @@ public class World {
 
 
     public String getOutput(){
-        String output = projectsDone + "\n";
+        String output = projectsDone + "";
 
-        for (Project p : projects) {
+        for (Project p : completedProjects) {
 
             if(p.isDone){
 
-                output = output + p.name + "\n";
+                output = output +"\n"+ p.name + "\n";
+
 
                 for (Contributor c : p.contributors) {
 
                     output = output + c.name + " ";
+
                 }
 
-                output = output + "\n";
+                output = output .trim();
             }
         }
-
 
         return output;
     }

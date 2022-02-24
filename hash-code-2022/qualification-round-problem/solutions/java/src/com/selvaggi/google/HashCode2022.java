@@ -123,11 +123,11 @@ public class HashCode2022 {
         // Read the input file
         World world = readInputFile(filePath, fileName);
 
-        System.out.println(world.toString());
+        //System.out.println(world.toString());
 
         world.elaborate();
 
-        System.out.println("Final Score: " + world.getScore());
+        //System.out.println("Final Score: " + world.getScore());
 
         System.out.println("Output. " + world.getOutput());
 

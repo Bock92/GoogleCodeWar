@@ -14,6 +14,7 @@ public class Project {
     public ArrayList<Contributor> contributors;
     public boolean workInProgress;
     public boolean isDone;
+    public int ogIdx;
 
 
     public Project(String name, int length, int score, int bestBefore, int rolesNumber){

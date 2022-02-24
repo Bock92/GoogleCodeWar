@@ -15,6 +15,15 @@ public class Contributor {
         this.isUnderEvaluation = false;
     }
 
+    public void upgradeSkill(Skill skill){
+
+        for (Skill s: skills) {
+
+            if(s.name.equals(skill.name) && (s.level == skill.level || s.level == skill.level - 1))
+                s.level++;
+        }
+    }
+
     public String toString() {
         return this.name + " isBusy: " + this.isBusy + " " + this.skills.toString();
     }
