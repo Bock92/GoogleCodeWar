@@ -6,6 +6,7 @@ public class Project {
 
     public String name;
     public int length;
+    public int startDay;
     public int score;
     public int bestBefore;
     public int rolesNumber;
@@ -21,6 +22,7 @@ public class Project {
         this.rolesNumber = rolesNumber;
         this.skills = new ArrayList<>();
         this.contributors = new ArrayList<>();
+        this.startDay = 0;
     }
 
     public String toString(){
