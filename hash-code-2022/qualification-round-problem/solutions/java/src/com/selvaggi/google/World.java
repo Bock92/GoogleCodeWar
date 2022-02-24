@@ -9,6 +9,8 @@ public class World {
     public ArrayList<Contributor> contributors;
 
     public World() {
+        this.projects = new ArrayList<>();
+        this.contributors = new ArrayList<>();
     }
 
     public void elaborate(){
