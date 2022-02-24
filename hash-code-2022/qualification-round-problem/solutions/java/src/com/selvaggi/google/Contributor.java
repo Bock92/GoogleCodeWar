@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 public class Contributor {
     public String name;
-    public Boolean isBusy;
+    public boolean isBusy;
+    public boolean isUnderEvaluation;
     public ArrayList<Skill> skills;
 
-    public Contributor(String name, Boolean isBusy) {
+    public Contributor(String name, boolean isBusy) {
         this.name = name;
         this.isBusy = isBusy;
         this.skills = new ArrayList<>();
+        this.isUnderEvaluation = false;
     }
 
     public String toString() {

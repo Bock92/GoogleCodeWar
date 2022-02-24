@@ -53,7 +53,9 @@ public class HashCode2022 {
                     contributor.skills.add(skill);
                 }
 
-                System.out.println(contributor.toString());
+                world.contributors.add(contributor);
+
+                //System.out.println(contributor.toString());
             }
 
             // Projects
@@ -81,7 +83,8 @@ public class HashCode2022 {
                     //System.out.println(skill.toString());
                     project.skills.add(skill);
                 }
-                System.out.println(project.toString());
+                //System.out.println(project.toString());
+                world.projects.add(project);
             }
             myReader.close();
 
@@ -132,6 +135,8 @@ public class HashCode2022 {
 
         // Read the input file
         World world = readInputFile(filePath, fileName);
+
+        System.out.println(world.toString());
 
         world.elaborate();
 
