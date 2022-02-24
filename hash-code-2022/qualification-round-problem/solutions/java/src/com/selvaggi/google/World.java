@@ -38,6 +38,6 @@ public class World {
 
     public String toString(){
 
-        return currentDay + " " + projects.toString() + " " + contributors.toString();
+        return currentDay + " \n" + projects.toString() + " \n" + contributors.toString();
     }
 }
