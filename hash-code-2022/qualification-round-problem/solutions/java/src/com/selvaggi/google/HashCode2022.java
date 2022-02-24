@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class HashCode2022 {
@@ -101,21 +103,6 @@ public class HashCode2022 {
 
             myWriter.write(outputBody);
 
-            /*
-            String output = completedProjects.size() + "\n";
-
-            for (Project p : completedProjects) {
-
-                output = output + p.name + "\n";
-
-                for (Contributor c : p.contributors) {
-
-                    output = output + c.name + " ";
-                }
-
-                output = output + "\n";
-            }*/
-
             myWriter.close();
             System.out.println("Successfully wrote to the file: " + outPath + fileName + "_out.txt");
         } catch (IOException e) {
@@ -147,5 +134,30 @@ public class HashCode2022 {
         // Write the file
         writeOutputFile(outPath, fileName, world.getOutput());
     }
+
+    /*
+    ORDINAMENTO PROGETTI PER SCADENZA
+
+    Collections.sort(projects, new Comparator<Project>() {
+        @Override
+        public int compare(Project p1, Project p2)
+        {
+            return  p1.bestBefore - p2.bestBefore;
+        }
+    });
+    */
+
+    /*
+    CALCOLO DEL PUNTEGGIO
+
+    int score = 0;
+        if(completedProjects != null && completedProjects.size() >0){
+
+        for (Project p : completedProjects) {
+
+            score += p.score;
+        }
+    }
+     */
 }
 

@@ -35,6 +35,18 @@ public class Project {
         return (currentDay - startDay) >= length;
     }
 
+    @Override
+    public boolean equals(Object v) {
+        boolean retVal = false;
+
+        if (v instanceof Project){
+            Project ptr = (Project) v;
+            retVal = ptr.name.equals(this.name);
+        }
+
+        return retVal;
+    }
+
     public String toString(){
 
         return name + " " + length + " " + score + " " + bestBefore  + " " + rolesNumber  + " " +
