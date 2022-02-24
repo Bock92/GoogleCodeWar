@@ -14,7 +14,7 @@ public class Contributor {
     }
 
     public String toString() {
-        return this.name + " isBusy: " + this.isBusy + " " + this.skills.toString(); 
+        return this.name + " isBusy: " + this.isBusy + " " + this.skills.toString();
     }
 
 
