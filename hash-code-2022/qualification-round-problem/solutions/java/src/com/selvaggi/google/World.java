@@ -3,10 +3,10 @@ package com.selvaggi.google;
 import java.util.*;
 
 public class World {
-/*    public HashMap<String, Street> streets;
-    public ArrayList<Car> cars;
-    public ArrayList<Intersection> intersections;
- */
+
+    public int currentDay;
+    public ArrayList<Project> projects;
+    public ArrayList<Contributor> contributors;
 
     public World() {
     }
@@ -26,4 +26,8 @@ public class World {
     }
 
 
+    public String toString(){
+
+        return currentDay + " " + projects.toString() + " " + contributors.toString();
+    }
 }
