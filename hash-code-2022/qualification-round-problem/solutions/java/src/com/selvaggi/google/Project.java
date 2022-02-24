@@ -13,7 +13,8 @@ public class Project {
     public ArrayList<Skill> skills;
     public ArrayList<Contributor> contributors;
 
-    void Project(String name, int length, int score, int bestBefore, int rolesNumber){
+
+    public Project(String name, int length, int score, int bestBefore, int rolesNumber){
 
         this.name = name;
         this.length = length;
