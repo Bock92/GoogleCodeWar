@@ -26,6 +26,11 @@ public class Project {
         this.startDay = 0;
     }
 
+    public boolean isCompleted(int currentDay){
+
+        return (currentDay - startDay) >= length;
+    }
+
     public String toString(){
 
         return name + " " + length + " " + score + " " + bestBefore  + " " + rolesNumber  + " " +
