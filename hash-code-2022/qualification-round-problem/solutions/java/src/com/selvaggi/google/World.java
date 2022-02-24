@@ -7,6 +7,7 @@ public class World {
     public int currentDay;
     public ArrayList<Project> projects;
     public ArrayList<Contributor> contributors;
+    public ArrayList<Project> completedProjects;
 
     public World() {
         this.projects = new ArrayList<>();

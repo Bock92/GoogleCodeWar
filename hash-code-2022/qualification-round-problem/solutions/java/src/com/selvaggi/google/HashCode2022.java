@@ -98,6 +98,21 @@ public class HashCode2022 {
 
             myWriter.write(outputBody);
 
+            /*
+            String output = completedProjects.size() + "\n";
+
+            for (Project p : completedProjects) {
+
+                output = output + p.name + "\n";
+
+                for (Contributor c : p.contributors) {
+
+                    output = output + c.name + " ";
+                }
+
+                output = output + "\n";
+            }*/
+
             myWriter.close();
             System.out.println("Successfully wrote to the file: " + outPath + fileName + "_out.txt");
         } catch (IOException e) {
