@@ -7,15 +7,14 @@ public class Contributor {
     public Boolean isBusy;
     public ArrayList<Skill> skills;
 
-    public Contributor(String name, Boolean isBusy, ArrayList skills) {
+    public Contributor(String name, Boolean isBusy) {
         this.name = name;
         this.isBusy = isBusy;
-        this.skills = skills;
+        this.skills = new ArrayList<>();
     }
 
     public String toString() {
         return this.name + " isBusy: " + this.isBusy + " " + this.skills.toString();
     }
-
 
 }
