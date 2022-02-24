@@ -9,8 +9,6 @@ public class World {
     public ArrayList<Contributor> contributors;
     public ArrayList<Project> completedProjects;
 
-    public ArrayList<Project> completedProjects;
-
     public World() {
         this.projects = new ArrayList<>();
         this.contributors = new ArrayList<>();
