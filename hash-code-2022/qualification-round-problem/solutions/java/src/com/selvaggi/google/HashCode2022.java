@@ -32,53 +32,57 @@ public class HashCode2022 {
             int projects = myReader.nextInt();
 
             System.out.println("Contributor: " + contributors + " Projects: " + projects);
-/*
-            int numberOfCustomer = myReader.nextInt();
+            myReader.nextLine();
+            for(int i = 0; i < contributors; i++){
+                String contributorLine = myReader.nextLine();
+                Scanner myLine = new Scanner(contributorLine);
 
-            System.out.println("numberOfCustomer " + numberOfCustomer);
+                String contributorName = myLine.next();
+                int contributorSkills = myLine.nextInt();
 
-            String test = myReader.nextLine();
+                Contributor contributor = new Contributor(contributorName, false);
+                //System.out.println("Contributor Name: " + contributorName);
 
-            //while (myReader.hasNextLine()) {
-            for (int i = 0; i < numberOfCustomer; i++){
-                Client c = new Client(i);
-
-
-                // Read Like Line
-                String likeLine = myReader.nextLine();
-                //System.out.println(likeLine);
-                Scanner myLine = new Scanner(likeLine);
-                int numberOfLikedIngredients = myLine.nextInt();
-                while (myLine.hasNext()) {
-                    String ingredientName = myLine.next();
-                    Ingredient newIngredient = new Ingredient(ingredientName);
-                    c.addLikedIngredient(newIngredient);
-                    //System.out.println("Like Ingredient: " + ingredientName);
-                    pizzeria.addIngredient(newIngredient, true, c);
-                    //newIngredient.addLikedClient(c);
+                for(int j = 0; j < contributorSkills; j++){
+                    Scanner skillLine = new Scanner(myReader.nextLine());
+                    String skillLineName = skillLine.next();
+                    int skillLevel = skillLine.nextInt();
+                    //System.out.println("Skill Name: " + skillLineName);
+                    Skill skill = new Skill(skillLineName, skillLevel);
+                    //System.out.println(skill.toString());
+                    contributor.skills.add(skill);
                 }
 
-                // Read Dislike Line
-                String dislikeLine = myReader.nextLine();
-                //System.out.println(dislikeLine);
-                Scanner myDislikeLine = new Scanner(dislikeLine);
-                int numberOfDislikedIngredients = myDislikeLine.nextInt();
-                while (myDislikeLine.hasNext()) {
-                    String ingredientName = myDislikeLine.next();
-                    Ingredient newIngredient = new Ingredient(ingredientName);
-                    c.addDislikedIngredient(newIngredient);
-                    //System.out.println("Dislike Ingredient: " + ingredientName);
-                    pizzeria.addIngredient(newIngredient, false, c);
-                    //newIngredient.addDislikedClient(c);
-                }
-
-                //System.out.println(c.toString());
-                pizzeria.addClient(c);
-
-                myLine.close();
+                System.out.println(contributor.toString());
             }
-*/
 
+            // Projects
+            for(int i = 0; i < projects; i++){
+                String projectsLine = myReader.nextLine();
+                Scanner myLine = new Scanner(projectsLine);
+
+                String projectName = myLine.next();
+                int projectDays = myLine.nextInt();
+                int projectScore = myLine.nextInt();
+                int projectBest = myLine.nextInt();
+                int projectRoles = myLine.nextInt();
+
+                /*System.out.println("Project Name: " + projectName + " Day " + projectDays + " Score " + projectScore +
+                        " Best: " + projectBest + " Roles: " + projectRoles);*/
+
+                Project project = new Project(projectName, projectDays, projectScore, projectBest, projectRoles);
+
+                for(int j = 0; j < projectRoles; j++){
+                    Scanner skillLine = new Scanner(myReader.nextLine());
+                    String skillLineName = skillLine.next();
+                    int skillLevel = skillLine.nextInt();
+                    //System.out.println("Skill Name: " + skillLineName);
+                    Skill skill = new Skill(skillLineName, skillLevel);
+                    //System.out.println(skill.toString());
+                    project.skills.add(skill);
+                }
+                System.out.println(project.toString());
+            }
             myReader.close();
 
         } catch (FileNotFoundException e) {
@@ -116,7 +120,7 @@ public class HashCode2022 {
 
         world.elaborate();
 
-        System.out.println("Final Pizza Score: " + world.getScore());
+        System.out.println("Final Score: " + world.getScore());
 
         // Write the file
         writeOutputFile(outPath, fileName, world.getOutput());
