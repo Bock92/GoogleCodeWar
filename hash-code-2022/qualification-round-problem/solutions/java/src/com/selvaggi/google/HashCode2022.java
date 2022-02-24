@@ -23,11 +23,15 @@ public class HashCode2022 {
 
         //streets = new ArrayList<>();
 
-
         try {
             File myObj = new File(filePath + fileName);
             System.out.println("File size in bytes " + myObj.length());
             Scanner myReader = new Scanner(myObj);
+
+            int contributors = myReader.nextInt();
+            int projects = myReader.nextInt();
+
+            System.out.println("Contributor: " + contributors + " Projects: " + projects);
 /*
             int numberOfCustomer = myReader.nextInt();
 

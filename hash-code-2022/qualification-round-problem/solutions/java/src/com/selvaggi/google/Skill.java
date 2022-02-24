@@ -8,4 +8,8 @@ public class Skill {
         this.name = name;
         this.level = level;
     }
+
+    public String toString(){
+        return "Skill Name: " +  this.name  + " Level: " + level;
+    }
 }
