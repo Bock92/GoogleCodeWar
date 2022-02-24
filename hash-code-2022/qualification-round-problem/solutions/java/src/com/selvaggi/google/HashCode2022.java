@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class HashCode2022 {
@@ -132,6 +134,20 @@ public class HashCode2022 {
     }
 
     /*
+    ORDINAMENTO PROGETTI PER SCADENZA
+
+    Collections.sort(projects, new Comparator<Project>() {
+        @Override
+        public int compare(Project p1, Project p2)
+        {
+            return  p1.bestBefore - p2.bestBefore;
+        }
+    });
+    */
+
+    /*
+    CALCOLO DEL PUNTEGGIO
+
     int score = 0;
         if(completedProjects != null && completedProjects.size() >0){
 
