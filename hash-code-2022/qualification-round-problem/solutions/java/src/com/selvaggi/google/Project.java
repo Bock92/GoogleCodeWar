@@ -19,6 +19,8 @@ public class Project {
         this.score = score;
         this.bestBefore = bestBefore;
         this.rolesNumber = rolesNumber;
+        this.skills = new ArrayList<>();
+        this.contributors = new ArrayList<>();
     }
 
     public String toString(){
