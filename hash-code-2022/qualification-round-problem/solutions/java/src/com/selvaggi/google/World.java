@@ -4,53 +4,93 @@ import java.util.*;
 
 public class World {
 
+    public int MAX_DAY = 1000;
+
     public int currentDay;
     public ArrayList<Project> projects;
     public ArrayList<Contributor> contributors;
-    public ArrayList<Project> completedProjects;
+    //public ArrayList<Project> completedProjects;
+    //public ArrayList<Project> workingProjects;
+    public int projectsInProgress;
+    public int projectsDone;
 
     public World() {
         this.projects = new ArrayList<>();
         this.contributors = new ArrayList<>();
-        this.completedProjects = new ArrayList<>();
+        //this.completedProjects = new ArrayList<>();
+        //this.workingProjects = new ArrayList<>();
+        this.projectsInProgress = 0;
+        this.projectsDone = 0;
     }
 
     public void elaborate(){
-
-        int pIdx = 0;
+        // Copy project
+        //ArrayList<Project> projectToWork = new ArrayList<>();
+        //projectToWork.addAll(projects);
 
         // Sort Projects
 
-        while (true){
+        while (projectsDone < projects.size()  && currentDay <= MAX_DAY){
 
             // Check complete projects
+            for (Project p: projects) {
+                if(p.workInProgress && p.isCompleted(currentDay)){
 
+                    projectsDone++;
+                    projectsInProgress--;
+                    p.isDone = true;
 
-
-            Project currentProject = projects.get(pIdx);
-
-            ArrayList<Contributor> tmpContributor = getProjectContributors(currentProject);
-
-            if(tmpContributor == null){
-                pIdx++;
-                continue;
-            }
-
-            if(tmpContributor != null) {
-                currentProject.contributors = tmpContributor;
-                currentProject.startDay = currentDay;
-                for (Contributor c: currentProject.contributors)
-                    c.isBusy = true;
+                    //completedProjects.add(p);
+                    //workingProjects.remove(p);
+                    for (Contributor c:p.contributors) {
+                        c.isBusy = false;
+                    }
+                }
             }
 
 
+            // Find if the project can be worked
+            for(Project currentProject: projects){
+
+                if(!currentProject.isDone && !currentProject.workInProgress){
+
+                    ArrayList<Contributor> tmpContributor = getProjectContributors(currentProject);
+                    if(tmpContributor == null){
+                        continue;
+                    }
+
+                    if(tmpContributor != null) {
+                        currentProject.contributors = tmpContributor;
+                        currentProject.startDay = currentDay;
+                        currentProject.workInProgress = true;
+                        projectsInProgress++;
+                        for (Contributor c: currentProject.contributors)
+                            c.isBusy = true;
+
+                    }
+                }
+
+                /*
+                ArrayList<Contributor> tmpContributor = getProjectContributors(currentProject);
+                if(tmpContributor == null){
+                    pIdx++;
+                    continue;
+
+                if(tmpContributor != null) {
+                    currentProject.contributors = tmpContributor;
+                    currentProject.startDay = currentDay;
+                    workingProjects.add(currentProject);
+                    //projectToWork.remove(currentProject);
+                    pIdx = 0;
+                    for (Contributor c: currentProject.contributors)
+                        c.isBusy = true;
+
+                }                }*/
+
+            }
 
             // Giorno successivo
             currentDay++;
-
-
-            if(currentDay > 2)
-                break;
         }
     }
 
@@ -62,10 +102,10 @@ public class World {
 
             //find contributor
             Contributor c = findContributor(s);
-            tmpContr.add(c);
-            if(c == null) {
+            if(c == null)
                 break;
-            }
+
+            tmpContr.add(c);
         }
 
         // Reset flag
@@ -102,19 +142,24 @@ public class World {
 
 
     public String getOutput(){
-        String output = completedProjects.size() + "\n";
+        String output = projectsDone + "\n";
 
-        for (Project p : completedProjects) {
+        for (Project p : projects) {
 
-            output = output + p.name + "\n";
+            if(p.isDone){
 
-            for (Contributor c : p.contributors) {
+                output = output + p.name + "\n";
 
-                output = output + c.name + " ";
+                for (Contributor c : p.contributors) {
+
+                    output = output + c.name + " ";
+                }
+
+                output = output + "\n";
             }
-
-            output = output + "\n";
         }
+
+
         return output;
     }
 

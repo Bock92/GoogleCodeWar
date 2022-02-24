@@ -142,6 +142,8 @@ public class HashCode2022 {
 
         System.out.println("Final Score: " + world.getScore());
 
+        System.out.println("Output. " + world.getOutput());
+
         // Write the file
         writeOutputFile(outPath, fileName, world.getOutput());
     }

@@ -12,6 +12,8 @@ public class Project {
     public int rolesNumber;
     public ArrayList<Skill> skills;
     public ArrayList<Contributor> contributors;
+    public boolean workInProgress;
+    public boolean isDone;
 
 
     public Project(String name, int length, int score, int bestBefore, int rolesNumber){
@@ -24,6 +26,8 @@ public class Project {
         this.skills = new ArrayList<>();
         this.contributors = new ArrayList<>();
         this.startDay = 0;
+        this.workInProgress = false;
+        this.isDone = false;
     }
 
     public boolean isCompleted(int currentDay){
