@@ -15,13 +15,26 @@ public class World {
 
     public void elaborate(){
 
+        int pIdx = 0;
+
         while (true){
 
-            if(currentDay > 2)
-                break;
+            ArrayList<Contributor> tmpContributors = new ArrayList<>();
+
+            Project currentProject = projects.get(pIdx);
+            for (Skill s:currentProject.skills ) {
+
+                //if(contributors.contains(s))
+                    //currentProject.contributors.add()
+
+            }
 
             // Giorno successivo
             currentDay++;
+
+
+            if(currentDay > 2)
+                break;
         }
     }
 
